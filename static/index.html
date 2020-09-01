@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>直播测试页面</title>
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: auto;
+            /* background-color: black; */
+        }
+
+        .video {
+            width: 1000px;
+            height: 600px;
+            margin: 10px auto
+        }
+
+        .form {
+            width: 1000px;
+            margin: auto;
+        }
+    </style>
+    <script>
+        // 默认直播地址
+        var url = 'http://live.hkstv.hk.lxdns.com/live/hks/playlist.m3u8';
+    </script>
+</head>
+
+<body>
+    <div class="video"></div>
+
+    <div class="form">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="请输入直播地址" aria-label="请输入直播地址" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button">GO</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="./ckplayer/ckplayer.js" charset="UTF-8"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        var videoObject = {
+            container: '.video', //“#”代表容器的ID，“.”或“”代表容器的class
+            variable: 'player', //该属性必需设置，值等于下面的new chplayer()的对象
+            autoplay: true, //自动播放
+            live: true, //直播视频形式
+            video: url //视频地址
+        };
+
+        var player = new ckplayer(videoObject);
+
+        // 按钮点击事件
+        $('button').click(function () {
+            changeUrl();
+        })
+
+        // 按钮回车事件
+        $('input.form-control').keyup(function (event) {
+            if (event.keyCode == 13) {
+                changeUrl();
+            }
+        })
+
+        // 改变直播地址
+        function changeUrl(url) {
+            if (typeof url == 'undefined' || url.length < 1) {
+                url = $('input.form-control').val();
+            }
+
+            if (typeof url == 'undefined' || url.length < 1) {
+                alert("请输入有效的直播地址");
+                return false;
+            }
+
+            console.log('直播地址:', url);
+            player.newVideo({
+                autoplay: true,
+                video: url
+            });
+        }
+    </script>
+</body>
+
+</html>
