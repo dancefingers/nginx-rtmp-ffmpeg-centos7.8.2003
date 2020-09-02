@@ -89,4 +89,8 @@ Use -h to get full help or, even better, run 'man ffmpeg'
 * OBS下载地址： https://obsproject.com
 * VLC下载地址： https://www.videolan.org/
 
-> 参考：https://gitee.com/littlezo/docker-nginx-rtmp
+> 参考：
+>
+> https://gitee.com/littlezo/docker-nginx-rtmp
+>
+> https://github.com/alfg/docker-nginx-rtmp
