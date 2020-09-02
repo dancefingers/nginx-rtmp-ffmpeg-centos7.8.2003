@@ -5,7 +5,7 @@ HLS实时流媒体的默认设置。 建立在CentOS7.8.2003上。
 * Nginx 1.18.0 (从源代码编译)
 * nginx-rtmp-module 1.2.1 (从源代码编译)
 * ffmpeg 2.8.15 (从源代码编译)
-* 默认HLS设置(见: nginx.conf)
+* 默认HLS设置(见: [nginx.conf](nginx.conf))
 
 
 ## 用法:
@@ -29,7 +29,22 @@ docker run -it -d -p 11935:1935 -p 180:80 -p 1443:443 [镜像名称][:tag]
 rtmp://<server ip>:11935/stream/$STREAM_NAME
 ```
 
+### SSL协议
+
+要禁用SSL，请参见[nginx.conf](nginx.conf)并注释：
+
+```
+listen       443 ssl;
+server_name  localhost;
+
+ssl_certificate      /usr/local/src/nginx/certs/server.crt;
+ssl_certificate_key  /usr/local/src/nginx/certs/server.key;
+```
+
+这将使用[certs](certs)中提供的自签名证书来启用HTTPS 。如果您希望使用HTTPS，**强烈建议**您获取自己的证书放置于目录certs中并更新`ssl_certificate`和`ssl_certificate_key`路径。
+
 ### OBS配置
+
 * 流类型: `自定义流媒体服务器`
 * 流地址: `rtmp://<server ip>:11935/stream`
 * 流密钥: `$STREAM_NAME` 如：hello
@@ -74,4 +89,4 @@ Use -h to get full help or, even better, run 'man ffmpeg'
 * OBS下载地址： https://obsproject.com
 * VLC下载地址： https://www.videolan.org/
 
-> 参考：https://github.com/alfg/docker-nginx-rtmp
+> 参考：https://gitee.com/littlezo/docker-nginx-rtmp
